@@ -1,0 +1,109 @@
+R codes for the five analyses
+
+# Install the required packages for the analyses
+install.packages (“gratia”)
+install.packages (“mgcv”)
+install.packages (“ggplot2”)
+install.packages (“dplyr”)
+
+# Load the packages
+library (“gratia”)
+library (“mgcv”)
+library (“ggplot2”)
+library (“dplyr”)
+
+# Load data
+n1 <- read.csv (“ST_C_updated.csv”)
+n2 <- read.csv (“ST_E_updated.csv”)
+n3 <- read.csv (“TT_E_updated.csv”)
+n4 <- read.csv (“TT_C_updated.csv”)
+n5 <- read.csv (“box_plot.csv”)
+
+# Build GAM for informational indicators in SC and frequency of disfluency markers in TE
+m1 <- gam (disfluency_TE ~ s (lexical_density_SC),
+          data = n1, method = “REML”)
+plot (m1, pages = 1)
+summary (m1)
+
+m1 <- gam(disfluency_TE ~ s(average_sentence_length_SC),
+          data = n1, method = "REML")
+plot(m1, pages = 1)
+summary(m1)
+
+m1 <- gam (disfluency_TE ~ s (delivery_rate_SC),
+          data = n1, method = "REML")
+plot (m1, pages = 1)
+summary (m1)
+
+m1 <- gam (disfluency_TE ~ s (proportion_of_numbers_SC),
+          data = n1, method = "REML")
+plot (m1, pages = 1)
+summary (m1)
+
+# Build GAM for informational indicators in SE and frequency of disfluency markers in TC
+m2 <- gam (disfluency_TC ~ s (lexical_density_SE),
+          data = n2, method = “REML"”)
+summary (m2)
+plot (m2, pages = 1)
+
+m2 <- gam (disfluency_TC ~ s (average_sentence_length_SE),
+          data = n2, method = "REML")
+summary (m2)
+plot (m2, pages = 1)
+
+m2 <- gam (disfluency_TC ~ s (delivery_rate_SE),
+          data = n2, method = “REML”)
+summary (m2)
+plot (m2, pages = 1)
+
+m2 <- gam (disfluency_TC ~ s (proportion_of_numbers_SE),
+          data = n2, method = “REML”)
+summary (m2)
+plot (m2, pages = 1)
+
+# Build GAM for informational indicators in TE and frequency of disfluency markers in TE
+m3 <- gam (disfluency_TE ~ s (lexical_density_TE),
+          data = n3, method = “REML”)
+summary (m3)
+plot (m3, pages = 1)
+
+m3 <- gam (disfluency_TE ~ s (average_sentence_length_TE),
+          data = n3, method = “REML”)
+summary (m3)
+plot (m3, pages = 1)
+
+m3 <- gam (disfluency_TE ~ s (delivery_rate_TE),
+          data = n3, method = “REML”)
+summary (m3)
+plot (m3, pages = 1)
+
+m3 <- gam (disfluency_TE ~ s (proportion_of_numbers_TE),
+          data = n3, method = “REML”)
+summary (m3)
+plot (m3, pages = 1)
+
+# Build GAM for informational indicators in TC and frequency of disfluency markers in TC
+m4 <- gam (disfluency_TC ~ s (lexical_density_TC),
+         data = n4, method = “REML”)
+summary (m4)
+plot (m4, pages = 1)
+
+m4 <- gam (disfluency_TC ~ s (average_sentence_length_TC),
+         data = n4, method = “REML”)
+summary (m4)
+plot (m4, pages = 1)
+
+m4 <- gam (disfluency_TC ~ s (delivery_rate_TC),
+         data = n4, method = “REML”)
+summary (m4)
+plot (m4, pages = 1)
+
+m4 <- gam (disfluency_TC ~ s (proportion_of_numbers_TC),
+         data = n4, method = “REML”)
+summary (m4)
+plot (m4, pages = 1)
+
+# Boxplot for Disfluency Ratio in TC and TE
+ggboxplot (n5, x = “group”, y = “disfluency_ratio”, 
+          color = “group”, palette = c (“#00AFBB”, “#E7B800”),
+          ylab = “disfluency_ratio”,  xlab = “Groups”)
